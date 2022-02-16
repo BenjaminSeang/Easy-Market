@@ -1,23 +1,28 @@
-import logo from './logo.svg';
 import './App.css';
+import {Router} from '@reach/router';
+import BuyerLogin from './components/BuyerLogin';
+import SellerLogin from './components/SellerLogin';
+import Register from './components/Register';
+import Home from './components/Home';
+import SellerPanel from './components/SellerPanel';
+import NewItem from './components/NewItem';
+import EditItem from './components/EditItem';
+import ItemDetail from './components/ItemDetail';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Router>
+        <Home path="/"/>
+        <Register path = "/register"/>
+        <BuyerLogin path = "/buyer/login"/>
+        <SellerLogin path = "/seller/login"/>
+        <SellerPanel path="/seller/panel/:username"/>
+        <NewItem path="/seller/newlisting/:username"/>
+        <EditItem path="/seller/edititem/:username/:id"/>
+        <ItemDetail path="/itemdetail/:id"/>
+      </Router>
+      
     </div>
   );
 }

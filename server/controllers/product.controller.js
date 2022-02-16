@@ -1,6 +1,7 @@
 const Product = require('../models/product.model');
 const jwt = require("jsonwebtoken");
 const User = require('../models/user.model');
+const { getMaxListeners } = require('../models/product.model');
 
 module.exports = {
 
@@ -33,6 +34,22 @@ module.exports = {
             })
     },
 
+    updateProduct: (req, res)=>{
+        
+        Product.findOneAndUpdate({_id: req.params.id},
+            req.body,
+            {new: true, runValidators: true} 
+            )
+            .then((updatedProduct)=>{
+                console.log(updatedProduct);
+                res.json(updatedProduct)
+            })
+            .catch((err)=>{
+                console.log("Error in updateProduct");
+                res.status(400).json(err); 
+            })
+    },
+
     findOneProduct: (req, res)=>{
         Product.findOne({_id: req.params.id}) 
             .then((oneProduct)=>{
@@ -57,23 +74,7 @@ module.exports = {
             })
     },
 
-    updateProduct: (req, res)=>{
-        Product.findOneAndUpdate({_id: req.params.id},
-            req.body,
-            {new: true, runValidators: true} 
-            )
-            .then((updatedProduct)=>{
-                console.log(updatedProduct);
-                res.json(updatedProduct)
-            })
-            .catch((err)=>{
-                console.log("Error in updateProduct");
-                res.status(400).json(err); 
-            })
-    },
-
-
-    findAllProductsByUser: (req, res)=>{
+    findAllProductsBySeller: (req, res)=>{
 
         console.log("req.jwtpayload.username :", req.jwtpayload.username )
         console.log(" req.params.username:", req.params.username)

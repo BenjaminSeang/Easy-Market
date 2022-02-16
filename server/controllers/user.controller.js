@@ -7,8 +7,8 @@ module.exports = {
 
     register: (req, res)=>{
         const user = new User(req.body);
-
-        user.save()
+        
+            user.save()
             .then((newUser)=>{
                 console.log(newUser);
                 console.log("Registration Successful");
@@ -21,6 +21,7 @@ module.exports = {
                 console.log("Registration Failed")
                 res.status(400).json(err);
             })
+
     },
 
     login: (req, res)=>{
@@ -42,7 +43,8 @@ module.exports = {
                                         {
                                             id: userRecord._id,
                                             email: userRecord.email,
-                                            username: userRecord.username
+                                            username: userRecord.username,
+                                            type: userRecord.type
                                         },
                                         process.env.JWT_SECRET
                                     ),
@@ -53,7 +55,8 @@ module.exports = {
                                 ).json({
                                     message: "Succesfully",
                                     userLoggedIn: userRecord.username,
-                                    userId: userRecord._id
+                                    userId: userRecord._id,
+                                    type: userRecord.type
                                 });
                             }
                             else{
