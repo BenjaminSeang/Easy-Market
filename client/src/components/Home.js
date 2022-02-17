@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { Link, navigate} from '@reach/router';
 import HomeNavBar from './HomeNavBar';
-
+import 'bootstrap/dist/css/bootstrap.min.css';
+import ItemCard from './ItemCard';
 
 const Home = (props) => {
 
@@ -35,30 +35,31 @@ const Home = (props) => {
             })
     }, [])
 
-    
-    
     return (
-        <div style={{ textAlign: "center" }}>
-            <header>
-                <h1>Easy Market</h1>
-                <HomeNavBar user={user} setUser={setUser}/>
-            </header>
-
-            {
-                productList.map((product, index) => (
-                    <div key={index}>
-                            <p>{product.title}</p>
-                            <img src={product.image} alt="Product image"/>
-                            <p>${product.price}</p>
-                            <p>{product.shipping}</p>
-                            <button>
-                                <Link to={`/itemdetail/${product._id}`}>
-                                    View This Item
-                                </Link>
-                            </button>
-                    </div>
-                ))
-            }
+        <div>
+            <div className='wrapper'>
+                <header>
+                    <h1>Easy Market</h1>
+                    <HomeNavBar user={user} setUser={setUser}/>
+                </header>
+                <div className='gallery'>
+                    {
+                        productList.map((product, index) => (
+                            <div key={index}>
+                                    <ItemCard 
+                                        title={product.title}
+                                        image={product.image}
+                                        price={product.price}
+                                        shipping={product.shipping}
+                                        id={product._id}
+                                        page={"home"}
+                                    />                 
+                            </div>
+                        ))
+                    }
+                </div>
+                
+            </div>
         </div>
     )
 }

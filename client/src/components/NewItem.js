@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 import { Link, navigate} from '@reach/router';
 import ItemForm from './ItemForm';
+import Button from 'react-bootstrap/Button';
 
 const NewItem = (props) => {
 
@@ -38,15 +39,17 @@ const NewItem = (props) => {
     }
 
     return(
-        <div className='wrapper'>
+        <div className='form-wrapper'>
             <header>
                 <h1>List an Item</h1>
-                <button>
-                    <Link to={`/seller/panel/${username}`}>
-                        Back to Seller Panel
+                <div className= 'navBarButtons'>
+                    <Link to={`/seller/panel/${username}`}> 
+                        <Button>
+                            Back to Seller Panel
+                        </Button>
                     </Link>
-                </button>
-                
+                </div>
+                    
             </header>
 
             <ItemForm 

@@ -1,6 +1,8 @@
-import React, { useState } from 'react';
-import { Link, navigate } from '@reach/router';
-import axios from 'axios';
+import React from 'react';
+import { Link } from '@reach/router';
+import Button from 'react-bootstrap/Button'
+import Form from 'react-bootstrap/Form'
+
 
 const ItemForm = (props) => {
     
@@ -16,6 +18,87 @@ const ItemForm = (props) => {
         
         setProduct(newStateObject);
     }
+
+    return(
+        <div>
+            <Form className="form-control form-control-lg" onSubmit={submitHandler}>
+                <Form.Group className="mb-3" controlId="type">
+                    <Form.Label>Title</Form.Label>
+                    {errors.title ? (
+                        <span className="error-text">
+                            {errors.title.message}
+                        </span>
+                    ) : null}
+                    <Form.Control 
+                        name="title" 
+                        value={product.title} 
+                        onChange={(e) => onChangeHandler(e)}>
+                    </Form.Control>
+                </Form.Group>
+
+                <Form.Group className="mb-3" controlId="type">
+                    <Form.Label>Price $</Form.Label>
+                    {errors.price ? (
+                        <span className="error-text">
+                            {errors.price.message}
+                        </span>
+                    ) : null}
+                    <Form.Control 
+                        name="price" 
+                        value={product.price} 
+                        onChange={(e) => onChangeHandler(e)}>
+                    </Form.Control>
+                </Form.Group>
+
+                <Form.Group className="mb-3" controlId="type">
+                    <Form.Label>Description</Form.Label>
+                    {errors.description ? (
+                        <span className="error-text">
+                            {errors.description.message}
+                        </span>
+                    ) : null}
+                    <Form.Control 
+                        name="description" 
+                        value={product.description} 
+                        onChange={(e) => onChangeHandler(e)}>
+                    </Form.Control>
+                </Form.Group>
+
+                <Form.Group className="mb-3" controlId="type">
+                    <Form.Label>Shipping</Form.Label>
+                    {errors.shipping ? (
+                        <span className="error-text">{errors.shipping.message}</span>
+                    ) : null}
+                    <select 
+                        className="form-select" 
+                        name="shipping" 
+                        value={product.shipping} 
+                        onChange={(e) => onChangeHandler(e)}>
+                        <option defaultValue="None">Choose your shipping method</option>
+                        <option value="Free Shipping">Free shipping, you pay for the shipping</option>
+                        <option value="Buyer pays for the shipping">Buyer pays for the shipping</option>
+                    </select>
+                </Form.Group>
+
+                <Form.Group className="mb-3" controlId="type">
+                    <Form.Label>Image URL</Form.Label>
+                    {errors.image ? (
+                        <span className="error-text">
+                            {errors.image.message}
+                        </span>
+                    ) : null}
+                    <Form.Control 
+                        name="image" 
+                        value={product.image} 
+                        onChange={(e) => onChangeHandler(e)}>
+                    </Form.Control>
+                </Form.Group>
+                <Button variant="primary" type="submit">
+                    List Item
+                </Button>
+            </Form>
+        </div>
+    )
 
     return(
         <div>

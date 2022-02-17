@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import { Link, navigate} from '@reach/router';
+import { Link } from '@reach/router';
 import LogoutButton from './LogoutButton';
+import Button from 'react-bootstrap/Button'
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const HomeNavBar = (props) => {
     const {user, setUser} = props;
@@ -9,30 +9,30 @@ const HomeNavBar = (props) => {
 
     if(user.type == 'Buyer'){
         return(
-            <div>
+            <div className='navBarButtons'>
                 <LogoutButton setUser={setUser}/>
             </div>
         )
     }else if(user.type == 'Seller'){
         return(
-            <div>
-                <button>
-                    <Link to={`/seller/panel/${username}`}>
+            <div className='navBarButtons'>
+                <Link to={`/seller/panel/${username}`}>
+                    <Button className='button'>
                         Seller Panel
-                    </Link>
-                </button>
+                    </Button>
+                </Link>
                 <LogoutButton setUser={setUser}/>
             </div>
         )
     }else{
         return(
-            <div>
-                <button>
-                    <Link to={"/buyer/login"}>Buyer Login</Link>
-                </button>
-                <button>
-                    <Link to={"/seller/login"}>Seller Login</Link>
-                </button>
+            <div className='navBarButtons'>
+                <Link to={"/buyer/login"}>
+                    <Button className='button'>Buyer Login</Button>
+                </Link>
+                <Link to={"/seller/login"}>
+                    <Button className='button'>Seller Login</Button>
+                </Link>
             </div>
         )
     }

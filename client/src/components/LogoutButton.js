@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { Link, navigate} from '@reach/router';
+import { navigate} from '@reach/router';
+import Button from 'react-bootstrap/Button'
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const LogoutButton = (props) => {
 
@@ -29,8 +30,8 @@ const LogoutButton = (props) => {
     }
 
     return(
-        <div>
-            <button onClick={logout}>Logout</button>
+        <div className='navBarButtons' style={{display: 'inline'}}>
+            <Button onClick={logout}>Logout</Button>
         </div>
     )
 }

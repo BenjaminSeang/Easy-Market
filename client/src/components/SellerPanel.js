@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { Link, navigate} from '@reach/router';
+import { Link } from '@reach/router';
 import LogoutButton from './LogoutButton';
-
+import Button from 'react-bootstrap/Button'
+import ItemCard from './ItemCard';
 
 const SellerPanel = (props) => {
     const [sellerProductList, setSellerProductList] = useState([]);
@@ -33,38 +34,51 @@ const SellerPanel = (props) => {
 
     }
 
-    return (
-        <div>
-            <h1>Seller {username} Panel</h1>
-            <LogoutButton/>
-            <button> 
-                <Link to={`/seller/newlisting/${username}`}>
-                    List an Item
-                </Link>
-            </button>
-            <button> 
-                <Link to={`/`}>
-                    Back to Home
-                </Link>
-            </button>
+    const logoutStyle = {
+        display: "inline",
+        marginLeft: "10px"
+    }
 
-            {
-                sellerProductList.map((product, index) => (
-                    <div key={index}>
-                            <p>{product.title}</p>
-                            <img src={product.image} alt="Product image"/>
-                            <p>Description: {product.description}</p>
-                            <p>${product.price}</p>
-                            <p>{product.shipping}</p>
-                            <button>
-                                <Link to={`/seller/edititem/${username}/${product._id}`}>Edit</Link>
-                            </button>
-                            <button onClick={()=> deleteProduct(product._id)}>
-                                Delete
-                            </button>
+    return (
+        <div className='wrapper'>
+            <header>
+                <h1>Seller {username} Panel</h1>
+                <div className='navBarButtons'>
+                    <Link to={`/seller/newlisting/${username}`} style={{marginLeft: 10}}> 
+                        <Button>
+                            List an Item
+                        </Button>
+                    </Link>
+
+                    <Link to={`/`} style={{marginLeft: 10}}> 
+                        <Button>
+                            Back to Home
+                        </Button>
+                    </Link>
+                    <div style={logoutStyle}>
+                        <LogoutButton />
                     </div>
-                ))
-            }
+                    
+                </div>
+            </header>
+                <div className='gallery'>
+                    {
+                        sellerProductList.map((product, index) => (
+                            <div key={index}>
+                                <ItemCard 
+                                    title={product.title}
+                                    image={product.image}
+                                    price={product.price}
+                                    shipping={product.shipping}
+                                    id={product._id}
+                                    page={"sellerPanel"}
+                                    deleteProduct = {deleteProduct}
+                                    username = {username}
+                                />
+                            </div>
+                        ))
+                    }
+                </div>
         </div>
     )
 }

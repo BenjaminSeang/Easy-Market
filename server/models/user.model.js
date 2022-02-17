@@ -27,7 +27,8 @@ const UserSchema = new mongoose.Schema({
             "Buyer",
             "Seller"
         ]
-    }
+    },
+
 
 }, { timestamps: true })
 
