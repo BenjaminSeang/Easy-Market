@@ -106,27 +106,5 @@ module.exports = {
             })
     },
 
-    addToCart: (req, res) => {
-        const productId = req.body;
-        User.updateOne(
-            { $push: {cart: productId} }
-        )
-        .then((productId)=>{
-            console.log("Added to cart")
-            res.json({productId})
-        })
-        .catch((err)=>{
-            console.log("Add to cart failed")
-            console.log(err)
-        })
-    },
-
-    getCart: (req,res) =>{
-        User.findOne({ _id: req.jwtpayload.id })
-        .then((user) => {
-            res.json(user.cart)
-        })
-        .catch(err => res.json(err))
-    }
 
 }
